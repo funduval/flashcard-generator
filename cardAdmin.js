@@ -5,7 +5,7 @@ var ClozeCard = require('./ClozeCard');
 
 var CardAdmin = function() {
 
-    this.newCloze = function(cloze, partial, fullText) {
+    this.newClozer = function(cloze, partial, fullText) {
 
     var newCloze = new ClozeCard(cloze, partial, fullText);
 
@@ -13,7 +13,7 @@ var CardAdmin = function() {
 
     };
 
-  this.newCard = function(front, back) {
+  this.newMaker = function(front, back) {
 
     var newCard = new BasicCard(front, back);
 

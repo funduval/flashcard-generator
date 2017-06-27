@@ -23,12 +23,12 @@ var MyAdmin = new CardAdmin();
 				var fullText = partial + cloze;
 				console.log("Cloze is: " + cloze)
 			  	
-			  	MyAdmin.newCloze(cloze,partial,fullText);
+			  	MyAdmin.newClozer(cloze,partial,fullText);
 			}
 
 			else {
 			
-			  	MyAdmin.newCard(front, back);
+			  	MyAdmin.newMaker(front, back);
 			}
 
 			
