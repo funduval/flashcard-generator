@@ -1,35 +1,93 @@
 var CardAdmin = require("./CardAdmin");
 const inquirer = require('inquirer');
 const basic = require('./BasicCard');
+var cardType;
+var input;
+  // Here we give the user a list to choose from.
+inquirer.prompt([{
+    type: "list",
+    message: "What would you like to do?\n",
+    choices: ["Make a Basic Question and Answer Card (front/back)?", "Make Card with Cloze Deletion (fill in the blank)"],
+    name: "choices"
 
-//PROMPTS!!!!
+  }]).then(function (answers) { 
 
-// Hold the value whether someone selects a "cloze" or "basic"
-var cardType = process.argv[2];
+  	// Hold the value whether someone selects a "cloze" or "basic"
+	var MyAdmin = new CardAdmin(); 
 
-// Either way, they need to provide a "question"
-var front = process.argv[3];
+    if (answers.choices === "Make a Basic Question and Answer Card (front/back)?") {
 
-// And they will need to provide an "answer"
-var back = process.argv[4];
+    	input = "basic"
 
-// Create an instance of the CardAdmin. 
-var MyAdmin = new CardAdmin(); 
+    	console.log("the Card Type you chose is: " + input);
+    	//put new set of prompts here
+    	inquirer.prompt([
+    	{
+    type: "input",
+    message: "What would you like the front of the card to say\n",
+    name: "front"
+  },
+    	{
+    type: "input",
+    message: "What would you like the back of the card to say\n",
+    name: "back"
+  }
 
-			if (cardType === "cloze") {
+  ]).then(function (answers) {
 
-				var cloze = back;
-				var partial = front;
-				var fullText = partial + cloze;
-				console.log("Cloze is: " + cloze)
-			  	
-			  	MyAdmin.newClozer(cloze,partial,fullText);
-			}
+  	MyAdmin.newMaker(front, back);
 
-			else {
-			
-			  	MyAdmin.newMaker(front, back);
-			}
+  });
+
+};
+
+   if (answers.choices === "Make Card with Cloze Deletion (fill in the blank)"){
+  
+   		input = "cloze"
+
+   		console.log("the Card Type you chose is: " + input);
+
+	     //put new set of prompts here
+	     inquirer.prompt([
+     
+   { 
+
+   	type: "input",
+    message: "What would you like the partial sentence to be?\n",
+    choices: ["Make a Basic Question and Answer Card (front/back)?", "Make Card with Cloze Deletion (fill in the blank)"],
+    name: "partial"
+
+  },
+
+   {
+    type: "input",
+    message: "What would you like the full answer to be?\n",
+    choices: ["Make a Basic Question and Answer Card (front/back)?", "Make Card with Cloze Deletion (fill in the blank)"],
+    name: "fullText"
+  },
+
+  {
+    type: "input",
+    message: "What would you like the deleted word to be?\n",
+    choices: ["Make a Basic Question and Answer Card (front/back)?", "Make Card with Cloze Deletion (fill in the blank)"],
+    name: "cloze"
+  }
+
+  ]).then(function (answers) {
+
+ 	 MyAdmin.newClozer(cloze,partial,fullText);
+
+  });
+
+};
+
+});
+
+
+
+
+
+
 
 			
 

@@ -1,25 +1,39 @@
-var CardAdmin = require("./cardAdmin");
+var inquirer = require('inquirer');
+const UserPrompts = function() {
 
-// Hold the value whether someone is an "admin" or "user"
-var loginType = process.argv[2];
+  // Here we give the user a list to choose from.
+  	inquirer.prompt([{
+    type: "list",
+    message: "What would you like to do?",
+    choices: ["Make a Basic Question and Answer Card (front/back)?", "Make Card with Cloze Deletion (fill in the blank)", "Play All of My Flashcards"],
+    name: "choices"
 
-// If they are a user... they will also need to provide a "name"
-var userName = process.argv[3];
+  }]).then(function (answers) { 
 
-// And they will need to provide a "location"
-var userLocation = process.argv[4];
+    if (answers.choices === "Make a Basic Question and Answer Card (front/back)?") {
+    	var input = "basic"
+    	console.log("Building your basic card...");
+   };
 
-// Create an instance of the WeatherAdmin. Remember WeatherAdmin is a constructor! Not an object.
-var MyAdmin = new CardAdmin();
+   if (answers.choices === "Make Card with Cloze Deletion (fill in the blank)"){
+   		var input = "cloze"
+    	console.log("Building your fill-in-the-blank question...");
 
-if (loginType === "admin") {
+   };
 
-  MyAdmin.getData();
-
-}
-
+   if (answers.choices === "Playback All of My Flashcards"){
+    	var input = "playback"
+    	console.log("Time for a Quiz!");
+    };
+   
 else {
 
-  MyAdmin.newUserSearch(userName, userLocation);
+	console.log("Oops! Something went wrong building the card.")
+};
 
-}
+};
+});
+};
+
+
+  // module.exports = UserPrompts;
