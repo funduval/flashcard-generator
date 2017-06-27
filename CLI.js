@@ -34,6 +34,8 @@ inquirer.prompt([{
   }
 
   ]).then(function (answers) {
+    var front = answers.front
+    var back = answers.back
 
   	MyAdmin.newMaker(front, back);
 
@@ -74,7 +76,10 @@ inquirer.prompt([{
   }
 
   ]).then(function (answers) {
-
+     var cloze = answers.cloze;
+     var partial = answers.partial;
+     var fullText = answers.fullText;
+     
  	 MyAdmin.newClozer(cloze,partial,fullText);
 
   });
