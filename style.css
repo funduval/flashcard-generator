@@ -1,0 +1,21 @@
+#cardFront{
+  	text-align: center;
+	display: inline-block;
+	margin:10%;
+	height: 200px;
+	border-width: 3px;
+	border-style:solid;
+	border-color: black;
+	padding:10px;
+}
+
+#cardBack{
+	text-align: center;
+	display: inline-block;
+	margin:10%;
+	height: 200px;
+	border-width: 3px;
+	border-style:solid;
+	border-color: black;
+	padding:10px;
+}
