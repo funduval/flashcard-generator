@@ -6,12 +6,11 @@ const BasicCard = function newCard(front,back){
 
 this.front = front;
 this.back = back;
-this.makeCard = function(){
+this.makeCard = function(front, back){
 
-			console.log('BasicCard.makeCard is working')
+			console.log(front + "\n" + back);
 			
-		};
-		console.log("newCard works!")
+		};	
 
 };
 
