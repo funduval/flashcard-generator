@@ -42,9 +42,9 @@ inquirer.prompt([{
                 if (err) {
                     console.error(err)
                 } else {
-                    console.log('\nSuccess! Your card has been logged.')
+                    console.log('\nYour card is in the deck. Come back and take a quiz.')
                 }
-            })
+            });
         });
 
     };
@@ -57,13 +57,6 @@ inquirer.prompt([{
 
         //put new set of prompts here
         inquirer.prompt([
-
-            {
-                type: "input",
-                message: "What would you like the partial sentence to be?\n",
-                choices: ["Make a Basic Question and Answer Card (front/back)?", "Make Card with Cloze Deletion (fill in the blank)"],
-                name: "partial"
-            },
 
             {
                 type: "input",
@@ -80,17 +73,18 @@ inquirer.prompt([{
             }
 
         ]).then(function(answers) {
-            var cloze = answers.cloze;
-            var partial = answers.partial;
+            var cloze = answers.cloze; 
             var fullText = answers.fullText;
+            var splitArray = fullText.split(cloze)
+            var partial = splitArray[0] + "..." + splitArray[1]
 
             MyAdmin.newClozer(cloze, partial, fullText);
 
-            fs.appendFile("log.txt", cloze + ", " + partial + ", " + fullText, function(err) {
+            fs.appendFile("log.txt", cloze + ", " + partial + ", " + fullText + "\n", function(err) {
                 if (err) {
                     console.error(err)
                 } else {
-                    console.log('\nSuccess! Your card has been logged.')
+                    console.log('\nYour card is in the deck. Come back and take a quiz.')
                 }
             })
         });
@@ -99,6 +93,13 @@ inquirer.prompt([{
     if (answers.choices === "Playback All of My Flashcards") {
                 input = "playback"
                 console.log("Time for a Quiz!");
+                  fs.readFile("log.txt", "UTF8", function(err, data) {
+                if (err) {
+                    console.error(err)
+                } else {
+                    console.log(data)
+                }
+            });
             };
 
             
